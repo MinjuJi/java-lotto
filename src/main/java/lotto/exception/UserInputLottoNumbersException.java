@@ -8,12 +8,20 @@ public class UserInputLottoNumbersException {
     private final static int MIN_LOTTO_NUMBER = 1;
     private final static int MAX_LOTTO_NUMBER = 45;
 
-    public void validateLotto(String numbers, String bonusNumber) {
-        validateLottoNumbersLength(numbers);
+    public void validateLotto(String inputNumbers, String inputBonusNumber) {
+        validateLottoNumbersLength(inputNumbers);
+        validateBonusNumberLength(inputBonusNumber);
+        validateNumbersRange();
     }
 
     public void validateLottoNumbersLength(String inputNumbers) {
         if (inputNumbers.replace(",", "").length() != VALID_LOTTO_LENGTH) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void validateBonusNumberLength(String inputBonusNumber) {
+        if (inputBonusNumber.length() != VALID_BONUS_LENGTH) {
             throw new IllegalArgumentException();
         }
     }
