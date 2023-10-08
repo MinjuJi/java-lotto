@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.domain.UserLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,9 @@ public class LottoGeneratorTest {
         final int LOTTO_SIZE = 6;
 
         // when
-        List<Integer> numbers = LottoGenerator.generatorLottoNumbers();
+        List<UserLotto> numbers = LottoGenerator.generatorUserLotto(3);
 
         // then
-        assertThat(numbers.size()).isEqualTo(LOTTO_SIZE);
+        assertThat(numbers.size()).isEqualTo(3);
     }
 }
