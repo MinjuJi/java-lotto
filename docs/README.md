@@ -1,76 +1,55 @@
-# 로또 게임 기능 목록 순서
-
-1. 로또 구매
-    - 로도의 가격은 1000원
-    - 구매 시 중복 없는 랜덤 넘버 6개 생성 후 리스트에 저장
-    - 구매한 로또의 총액을 저장
-
-2. 당첨 번호 및 보너스 번호 입력
-    - 당첨 번호 입력 받기
-    - 보너스 번호 입력 받기
-    - 당첨 번호와 보너스 번호 사이에 중복은 없는지 예외처리 진행
-    - 당첨 번호들이 1~45의 범위 안에 들어가있는지 예외처리 진행
-
-3. 당첨 확인 및 통계
-    - 구매한 것 중 당첨된 것을 카운팅
-    - 전체 수익금 계산
-    - 수익률 계산
-    - view를 통해 사용자에게 출력
+# 기능 구현 목록
 
 ---
 
-# 프로젝트 구조 및 상세 구현 목록
+## 기능 흐름
 
-## :file_folder: domain
+1. 사용자로부터 로또 구입 금액을 받는다.
+2. 사용자의 로또 구입 금액 n원을 바탕으로 랜덤한 로또 번호를 (n/1000)개 생성한다.
+3. 사용자의 로또 구매 장 수와, 로또 번호 n개를 출력해준다.
+4. 로또 당첨 번호를 입력받는다.
+5. 보너스 번호를 입력받는다.
+6. 당첨내역을 출력한다.
+7. 수익률을 출력한다.
 
-- Lotto
-    - 당첨 번호 6개 + 보너스 번호 입력 후 저장
-- User
-    - 로또 구매 및 저장(구매 금액과 총 상금 관리)
-- UserLotto
-    - 사용자가 구입한 로또 번호가 담긴 클래스
+---
 
-## :file_folder: enum
+## 패키지 별 기능 구현
 
-- LottoPrize
-    - 로또 등수 별 상금
-
-## :file_folder: util
-
-- GenerateLottoNumbers
-    - 유저가 로또 구매시 번호 추출 및 정렬
-- RoundToTwoDecimalParser
-    - 수익률 소수점 둘째 자리에서 반올림
-- SeparatedByCommas
-    - 유저 입력 시 ',' 기준으로 분리
-
-## :file_folder: exception
-
-- UserBuyLottoException
-    - 로또 구입 금액 입력 시 1000원 단위인지 확인
-- UserInputLottoNumbersException
-    - 1~45 숫자인지 확인
-    - 보너스 번호 입력 시 중복 확인
-    - 입력 값 ',' 구분 확인
-
-## :file_folder: service
-
-- LottoViewService
-    - view를 통해 입력받은 값을 도메인에 저장
-    - view를 통해 계산 값을 출력
-- LottoClaculateService
-    - 로또 당첨 확인 및 수익률을 계산
-
-## :file_folder: controller
+### :file_folder: controller
 
 - LottoController
-    - service를 통해 로또의 구입 및 입력, 츨력을 명령
+    - view를 이용하여 입출력을 하고, 도메인의 값을 넣어준다. 전반적인 게임의 흐름은 컨트롤러 내에서 이루어진다.
 
-## :file_folder: view
+### :file_folder: domain
+
+- Lotto
+    - 당첨 번호 관리한다.
+    - 보너스 번호 관리한다.
+- UserLotto
+    - 유저의 로또를 한장 단위로 관리한다.
+- USer
+    - 로또 n장을 UserLotto를 통해 관리한다.
+    - 구매 금액을 관리한다.
+    - 수익금을 관리한다.
+
+### :file_folder: view
 
 - InputView
-    - 유저의 구입 금액을 입력받음
-    - 로또 당첨 번호를 입력받음
+    - 유저의 로또 구매금액을 입력받는다.
+    - 당첨번호와 보너스 번호를 입력받는다.
 - OutputView
-    - 로또 구매 시, 랜덤으로 생성된 번호 출력
-    - 당첨 통계 출력
+    - 전반적인 출력을 담당한다.
+    - 유저가 구매한 로또의 번호를 출력해준다.
+
+### :file_folder: exception
+
+- UserException
+    - 유저의 구입 금액 입력 예외처리를 담당한다.
+- LottoException
+    - 당첨 번호와 보너스 번호 예외처리를 담당한다.
+
+### :file_folder: util
+
+- LottoGenerator
+    - 로또 랜덤 넘버 생성을 해준다.
