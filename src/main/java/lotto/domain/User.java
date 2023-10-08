@@ -6,11 +6,15 @@ import java.util.List;
 
 public class User {
     private final int buyingPrice;
-    private final List<UserLotto> lotto;
+    private final List<UserLotto> lottos;
 
     public User(int buyingPrice) {
         this.buyingPrice = buyingPrice;
-        this.lotto = LottoGenerator.generatorUserLotto(getLottoQuantity());
+        this.lottos = createLottos();
+    }
+
+    private List<UserLotto> createLottos() {
+        return LottoGenerator.generatorUserLotto(getLottoQuantity());
     }
 
     private int getLottoQuantity() {
