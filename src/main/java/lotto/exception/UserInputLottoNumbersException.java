@@ -5,16 +5,17 @@ import java.util.List;
 import java.util.Set;
 
 public class UserInputLottoNumbersException {
-    private final static int VALID_LOTTO_LENGTH = 6;
-    private final static int VALID_BONUS_LENGTH = 1;
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
+    private static final int VALID_LOTTO_LENGTH = 6;
+    private static final int VALID_BONUS_LENGTH = 1;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     public void validateLotto(String inputNumbers, String inputBonusNumber) {
         validateLottoNumbersLength(inputNumbers);
         validateBonusNumberLength(inputBonusNumber);
         validateNumbersRange();
         validateOverlapNumbers();
+        validateOverlapBonusNumber();
     }
 
     public void validateLottoNumbersLength(String inputNumbers) {
@@ -43,6 +44,12 @@ public class UserInputLottoNumbersException {
         }
         if (numbers.size() != inputNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되면 안 됩니다.");
+        }
+    }
+
+    public void validateOverlapBonusNumber(List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 중복되면 안 됩니다.");
         }
     }
 }
