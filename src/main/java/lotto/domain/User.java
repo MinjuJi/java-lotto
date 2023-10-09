@@ -20,4 +20,8 @@ public class User {
     private int getLottoQuantity() {
         return this.buyingPrice / 1000;
     }
+
+    private List<UserLotto> getLottos(){
+        return lottos;
+    }
 }
