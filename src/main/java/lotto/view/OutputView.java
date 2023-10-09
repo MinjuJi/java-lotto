@@ -5,6 +5,8 @@ import lotto.domain.UserLotto;
 import java.util.List;
 
 public class OutputView {
+    private final static String ERROR = "[ERROR] ";
+
     public void printAskBuyingPrice() {
         System.out.println("구입 금액을 입력해주세요.");
     }
@@ -38,5 +40,9 @@ public class OutputView {
     public void printResult() {
         System.out.println("\n당첨 통계");
         System.out.println("---");
+    }
+
+    public void printException(String message) {
+        System.out.println(ERROR + message);
     }
 }
