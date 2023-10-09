@@ -2,6 +2,12 @@ package lotto.exception;
 
 public class UserException {
 
+    public void validateBuyingPrice(String input) {
+        checkContainsOnlyDigits(input);
+        checkPriceIsNotZero(input);
+        checkPrice(input);
+    }
+
     private void checkContainsOnlyDigits(String input) {
         for (int i = 0; i < input.length(); i++) {
             if (!Character.isDigit(input.charAt(i))) {
