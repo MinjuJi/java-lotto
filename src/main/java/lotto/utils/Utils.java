@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Utils {
-    public static List<Integer> GenerateRandomUniqueNumber(int start, int end, int count) {
+    public static List<Integer> generateRandomUniqueNumber(int start, int end, int count) {
         return Randoms.pickUniqueNumbersInRange(start, end, count);
     }
 
