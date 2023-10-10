@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.Buyer;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
 import lotto.utils.Utils;
 import lotto.validation.Validation;
 import lotto.view.InputMessage;
@@ -20,6 +21,7 @@ public class Service {
     private static final int LOTTO_MAX_AMOUNT = 100_000; // 변수명 수정 필요
 
     Buyer buyer; // 접근제어자 안 붙이는 이유
+    LottoGame lottoGame;
 
     public void initBuyer() {
         buyer = new Buyer(getInputAmount());
@@ -91,5 +93,14 @@ public class Service {
         Validation.validateNumberInRange(bonusNumber, LOTTO_START_NUMBER, LOTTO_LAST_NUMBER);
 
         return bonusNumber;
+    }
+
+    public void playLottoGame(){
+        lottoGame = new LottoGame(getInputWinningNumbers());
+        int bonusNumber = getInputBonusNumber();
+
+        Validation.validateDuplicatedNumberInList(lottoGame.getWinningNumbers(), bonusNumber);
+
+        lottoGame.setBonusNumber(bonusNumber);
     }
 }
