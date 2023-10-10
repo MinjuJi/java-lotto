@@ -7,13 +7,14 @@ import lotto.validation.Validation;
 import lotto.view.InputMessage;
 import lotto.view.OutputMessage;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Service {
     private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
+    private static final int LOTTO_LAST_NUMBER = 45;
     private static final int LOTTO_LENGTH = 6;
     private static final int LOTTO_LEAST_AMOUNT = 1_000; // 변수명 수정 필요
     private static final int LOTTO_MAX_AMOUNT = 100_000; // 변수명 수정 필요
@@ -54,13 +55,28 @@ public class Service {
     }
 
     public Lotto generateLottoNumber() {
-        List<Integer> numbers = Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_LENGTH);
+        List<Integer> numbers = Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER, LOTTO_LENGTH);
 
         Validation.validateLengthOfList(numbers, LOTTO_LENGTH);
         Validation.validateDuplicationList(numbers);
-        Validation.validateListNumberInRange(numbers, LOTTO_START_NUMBER, LOTTO_END_NUMBER);
+        Validation.validateListNumberInRange(numbers, LOTTO_START_NUMBER, LOTTO_LAST_NUMBER);
 
         Utils.sortListNaturalOrder(numbers);
         return new Lotto(numbers);
+    }
+
+    public List<Integer> getInputWinningNumbers() {
+        InputMessage.inputWinningNumbers();
+        String userInput = readLine().trim();
+
+        Validation.validateListStringToInteger(Arrays.asList(userInput.split(",")));
+
+        List<Integer> winningNumbers = Utils.stringToIntegerList(userInput);
+
+        Validation.validateLengthOfList(winningNumbers, LOTTO_LENGTH);
+        Validation.validateDuplicationList(winningNumbers);
+        Validation.validateListNumberInRange(winningNumbers, LOTTO_START_NUMBER, LOTTO_LAST_NUMBER);
+
+        return winningNumbers;
     }
 }
