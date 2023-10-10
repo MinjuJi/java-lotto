@@ -2,8 +2,10 @@ package lotto.utils;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Utils {
     public static List<Integer> generateRandomUniqueNumber(int start, int end, int count) {
@@ -13,4 +15,25 @@ public class Utils {
     public static void sortListNaturalOrder(List<Integer> list) {
         Collections.sort(list);
     }
+
+    public static List<Integer> stringToIntegerList(String string) {
+        return Arrays.stream(stringToIntArray(string))
+                     .boxed()
+                     .collect(Collectors.toList());
+    }
+
+    public static int[] stringToIntArray(String string) {
+        return Arrays.stream(string.split(","))
+                     .mapToInt(Integer::parseInt)
+                     .toArray();
+    }
+
+// stringToIntegerList() 와 stringToIntArray()를 합친 메소드. 이게 더 간결하지 않나?
+//    public static List<Integer> stringToIntegerList2(String string) {
+//        return Arrays.stream(string.split(","))
+//                     .mapToInt(Integer::parseInt)
+//                     .boxed()
+//                     .collect(Collectors.toList());
+//    }
+
 }
