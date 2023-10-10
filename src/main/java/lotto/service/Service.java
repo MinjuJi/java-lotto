@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Buyer;
 import lotto.domain.Lotto;
 import lotto.utils.Utils;
 import lotto.validation.Validation;
@@ -16,15 +17,34 @@ public class Service {
     private static final int LOTTO_LEAST_AMOUNT = 1_000; // 변수명 수정 필요
     private static final int LOTTO_MAX_AMOUNT = 100_000; // 변수명 수정 필요
 
+    Buyer buyer; // 접근제어자 안 붙이는 이유
+
+    public void initBuyer() {
+        buyer = new Buyer(getInputAmount());
+    }
+
     public int getInputAmount() {
         InputMessage.inputAmount();
-        int amount = Integer.parseInt(readLine().trim());
+        int amount = Integer.parseInt(readLine().trim()); // trim() 하는 이유
 
         Validation.validateMultipleNumber(amount, LOTTO_LEAST_AMOUNT);
         Validation.validateExceedNumber(amount, LOTTO_MAX_AMOUNT);
 
         return amount;
     }
+
+    public void buyAllLotto() {
+        int count = (buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT);
+        for (int i = count; i > 0; i--) {
+            buyOneLotto();
+        }
+    }
+
+    public void buyOneLotto() {
+        Lotto lotto = generateLottoNumber();
+        buyer.buyLotto(lotto);
+    }
+
 
     public Lotto generateLottoNumber() {
         List<Integer> numbers = Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_LENGTH);
