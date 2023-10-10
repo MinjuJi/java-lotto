@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.utils.Utils;
 import lotto.validation.Validation;
 import lotto.view.InputMessage;
+import lotto.view.OutputMessage;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class Service {
     }
 
     public void buyAllLotto() {
-        int count = (buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT);
+        int count = (buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT); // 메소드로 분리
         for (int i = count; i > 0; i--) {
             buyOneLotto();
         }
@@ -45,6 +46,12 @@ public class Service {
         buyer.buyLotto(lotto);
     }
 
+    public void showBuyingResult() {
+        OutputMessage.purchaseComplete(buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT); // 메소드로 분리
+        for (Lotto lotto : buyer.getPurchasedLotteries()) {
+            OutputMessage.lottoNumbers(lotto.getNumbers());
+        }
+    }
 
     public Lotto generateLottoNumber() {
         List<Integer> numbers = Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_LENGTH);
