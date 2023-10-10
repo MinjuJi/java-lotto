@@ -95,7 +95,7 @@ public class Service {
         return bonusNumber;
     }
 
-    public void playLottoGame(){
+    public void playLottoGame() {
         lottoGame = new LottoGame(getInputWinningNumbers());
         int bonusNumber = getInputBonusNumber();
 
@@ -104,7 +104,12 @@ public class Service {
         lottoGame.setBonusNumber(bonusNumber);
     }
 
-    public int countCorrectLottoNumbers(Lotto lotto){
+    public int countCorrectLottoNumbers(Lotto lotto) {
         return Utils.countSameElements(lottoGame.getWinningNumbers(), lotto.getNumbers());
+    }
+
+    public boolean containsBonusNumber(Lotto lotto) {
+        return lotto.getNumbers()
+                    .contains(lottoGame.getBonusNumber());
     }
 }
