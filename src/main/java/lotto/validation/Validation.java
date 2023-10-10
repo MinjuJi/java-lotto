@@ -30,8 +30,14 @@ public class Validation {
         }
     }
 
-    public static void validateMultipleNumber(int dividend, int divisor) {
+    public static void validateMultipleNumber(int dividend, int divisor) { // 메소드명, 인자명 수정 필요해보임
         if (dividend % divisor != 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static void validateExceedNumber(int number, int limitNumber) { // 메소드명, 인자명 수정 필요해보임
+        if (number > limitNumber) {
             throw new IllegalArgumentException();
         }
     }
