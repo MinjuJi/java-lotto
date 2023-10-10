@@ -103,4 +103,8 @@ public class Service {
 
         lottoGame.setBonusNumber(bonusNumber);
     }
+
+    public int countCorrectLottoNumbers(Lotto lotto){
+        return Utils.countSameElements(lottoGame.getWinningNumbers(), lotto.getNumbers());
+    }
 }
