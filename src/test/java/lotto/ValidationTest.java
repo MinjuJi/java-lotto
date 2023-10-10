@@ -57,4 +57,24 @@ public class ValidationTest {
         assertThat(result2).isInstanceOf(IllegalArgumentException.class);
         assertThat(result3).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void validateLengthOfList() {
+        //given
+        List<Integer> given = List.of(30, 1, 45, 9, 2, 23);
+        int case1 = 6;
+        int case2 = 3;
+
+        //when
+        Throwable result1 = catchThrowable(() -> {
+            Validation.validateLengthOfList(given, case1);
+        });
+        Throwable result2 = catchThrowable(() -> {
+            Validation.validateLengthOfList(given, case2);
+        });
+
+        //then
+        assertThat(result1).doesNotThrowAnyException();
+        assertThat(result2).isInstanceOf(IllegalArgumentException.class);
+    }
 }
