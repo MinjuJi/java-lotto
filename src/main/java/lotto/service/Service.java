@@ -9,6 +9,7 @@ import lotto.validation.Validation;
 import lotto.view.InputMessage;
 import lotto.view.OutputMessage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,7 @@ public class Service {
     }
 
     public Lotto generateLottoNumber() {
-        List<Integer> numbers = Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER, LOTTO_LENGTH);
+        List<Integer> numbers = new ArrayList<>(Utils.generateRandomUniqueNumber(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER, LOTTO_LENGTH));
 
         Validation.validateLengthOfList(numbers, LOTTO_LENGTH);
         Validation.validateDuplicationList(numbers);
@@ -134,5 +135,11 @@ public class Service {
             Rank rank = determineLottoRank(lotto);
             result.put(rank, result.getOrDefault(rank, 0) + 1);
         }
+    }
+
+    public void showGameResult() {
+        OutputMessage.winningStatistics();
+        OutputMessage.showRankResult(buyer.getLottoResult());
+        OutputMessage.showYieldResult(buyer.getYield());
     }
 }
