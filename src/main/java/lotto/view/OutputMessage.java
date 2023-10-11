@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OutputMessage {
+    private static final int COUNT_ZERO = 0;
+
     public static void purchaseComplete(int count) {
         System.out.printf("%d개를 구매했습니다.\n", count);
     }
@@ -26,7 +28,7 @@ public class OutputMessage {
     }
 
     private static void showSingleRankResult(HashMap<Rank, Integer> map, Rank rank) {
-        if (rank.equals(Rank.NO_RANK)) {
+        if (rank.getCount() == COUNT_ZERO) {
             return;
         }
         if (rank.equals(Rank.SECOND)) {
