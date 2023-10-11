@@ -32,7 +32,9 @@ public class Service {
 
     public int getInputAmount() {
         InputMessage.inputAmount();
-        int amount = Integer.parseInt(readLine().trim()); // trim() 하는 이유
+        String userInput = readLine().trim(); // trim() 하는 이유
+        Validation.validateStringToInteger(userInput);
+        int amount = Integer.parseInt(userInput);
 
         Validation.validateMultipleNumber(amount, LOTTO_LEAST_AMOUNT);
         Validation.validateExceedNumber(amount, LOTTO_MAX_AMOUNT);
@@ -116,6 +118,15 @@ public class Service {
                     .contains(lottoGame.getBonusNumber());
     }
 
+    public void checkBuyerLotteries() {
+        HashMap<Rank, Integer> result = buyer.getLottoResult();
+
+        for (Lotto lotto : buyer.getPurchasedLotteries()) {
+            Rank rank = determineLottoRank(lotto);
+            result.put(rank, result.getOrDefault(rank, 0) + 1);
+        }
+    }
+
     public Rank determineLottoRank(Lotto lotto) {
         int correctCount = countCorrectLottoNumbers(lotto);
         boolean correctBonusNumber = containsBonusNumber(lotto);
@@ -128,14 +139,6 @@ public class Service {
         return Rank.NO_RANK;
     }
 
-    public void checkBuyerLotteries() {
-        HashMap<Rank, Integer> result = buyer.getLottoResult();
-
-        for (Lotto lotto : buyer.getPurchasedLotteries()) {
-            Rank rank = determineLottoRank(lotto);
-            result.put(rank, result.getOrDefault(rank, 0) + 1);
-        }
-    }
 
     public void showGameResult() {
         OutputMessage.winningStatistics();
