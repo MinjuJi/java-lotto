@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class Utils {
     private static final int CONTAIN = 1;
     private static final int NOT_CONTAIN = 0;
+    private static final int COUNT_ZERO = 0;
 
     public static List<Integer> generateRandomUniqueNumber(int start, int end, int count) {
         return Randoms.pickUniqueNumbersInRange(start, end, count);
@@ -40,7 +41,7 @@ public class Utils {
 //    }
 
     public static int countSameElements(List<Integer> list1, List<Integer> list2) {
-        int count = 0;
+        int count = COUNT_ZERO;
         for (int number : list2) {
             count += countContainsNumber(list1, number);
         }

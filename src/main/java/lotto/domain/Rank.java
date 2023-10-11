@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public enum Rank {
-    NO_RANK(0, false, 0, "0"), // 1, 2는??
+    NO_RANK(0, false, 0, "0"), // isBonus가 필요한가?
     FIFTH(3, false, 5_000, "5_000"),
     FOURTH(4, false, 50_000, "50_000"),
     THIRD(5, false, 1_500_000, "1_500_000"),
