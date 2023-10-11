@@ -13,8 +13,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        Utils.sortListNaturalOrder(numbers);
-        this.numbers = numbers;
+        this.numbers = Utils.sortListNaturalOrder(numbers);
     }
 
     public List<Integer> getNumbers() {
