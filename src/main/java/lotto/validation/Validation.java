@@ -36,7 +36,7 @@ public class Validation {
     }
 
     public static void validateMultipleNumber(int dividend, int divisor) { // 메소드명, 인자명 수정 필요해보임
-        if (dividend % divisor != 0) {
+        if (dividend < divisor || dividend % divisor != 0) {
             ErrorMessage.multipleNumberError(divisor);
             throw new IllegalArgumentException();
         }
