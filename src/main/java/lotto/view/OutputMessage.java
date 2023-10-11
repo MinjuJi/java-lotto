@@ -9,7 +9,7 @@ public class OutputMessage {
     private static final int COUNT_ZERO = 0;
 
     public static void purchaseComplete(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
+        System.out.printf("\n%d개를 구매했습니다.\n", count);
     }
 
     public static void lottoNumbers(List<Integer> numbers) {
@@ -17,7 +17,7 @@ public class OutputMessage {
     }
 
     public static void winningStatistics() {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---");
     }
 
