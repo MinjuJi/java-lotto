@@ -38,6 +38,6 @@ public class OutputMessage {
     }
 
     public static void showYieldResult(double yield) {
-        System.out.printf("총 수익률은 %.1f%%입니다.", yield);
+        System.out.printf("총 수익률은 %,.1f%%입니다.", yield);
     }
 }

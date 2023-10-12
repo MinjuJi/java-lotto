@@ -31,6 +31,13 @@ public class Controller {
         showBuyingResult();
     }
 
+    private void showBuyingResult() {
+        OutputMessage.purchaseComplete(buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT);
+        for (Lotto lotto : buyer.getPurchasedLotteries()) {
+            OutputMessage.lottoNumbers(lotto.getNumbers());
+        }
+    }
+
     private void initLottoGame() {
         lottoGame = new LottoGame(getInputWinningNumbers(), getInputBonusNumber());
     }
@@ -46,13 +53,6 @@ public class Controller {
         InputMessage.inputAmount();
         String userInput = readLine().trim();
         return Utils.stringToInteger(userInput);
-    }
-
-    private void showBuyingResult() {
-        OutputMessage.purchaseComplete(buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT);
-        for (Lotto lotto : buyer.getPurchasedLotteries()) {
-            OutputMessage.lottoNumbers(lotto.getNumbers());
-        }
     }
 
     private List<Integer> getInputWinningNumbers() {

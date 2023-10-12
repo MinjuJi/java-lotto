@@ -28,26 +28,26 @@ public class Utils {
         return Integer.parseInt(string);
     }
 
-    public static List<Integer> stringToIntegerList(String string) {
-        Validation.validateListStringToInteger(Arrays.asList(string.split(",")));
-        return Arrays.stream(stringToIntArray(string))
-                     .boxed()
-                     .collect(Collectors.toList());
-    }
-
-    public static int[] stringToIntArray(String string) {
-        return Arrays.stream(string.split(","))
-                     .mapToInt(Integer::parseInt)
-                     .toArray();
-    }
-
-// stringToIntegerList() 와 stringToIntArray()를 합친 메소드. 이게 더 간결하지 않나?
 //    public static List<Integer> stringToIntegerList(String string) {
-//        return Arrays.stream(string.split(","))
-//                     .mapToInt(Integer::parseInt)
+//        Validation.validateListStringToInteger(Arrays.asList(string.split(",")));
+//        return Arrays.stream(stringToIntArray(string))
 //                     .boxed()
 //                     .collect(Collectors.toList());
 //    }
+//
+//    public static int[] stringToIntArray(String string) {
+//        return Arrays.stream(string.split(","))
+//                     .mapToInt(Integer::parseInt)
+//                     .toArray();
+//    }
+
+// stringToIntegerList() 와 stringToIntArray()를 합친 메소드.
+    public static List<Integer> stringToIntegerList(String string) {
+        return Arrays.stream(string.split(","))
+                     .mapToInt(Integer::parseInt)
+                     .boxed()
+                     .collect(Collectors.toList());
+    }
 
     public static int countSameElements(List<Integer> list1, List<Integer> list2) {
         int count = COUNT_ZERO;

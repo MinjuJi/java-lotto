@@ -20,7 +20,7 @@ public class Service {
 
     public void buyAllLotto(Buyer buyer) {
         int count = buyer.getPurchaseAmount() / LOTTO_LEAST_AMOUNT;
-        for (; count > COUNT_ZERO; count--) {
+        for (int i = count; i > COUNT_ZERO; i--) {
             buyOneLotto(buyer);
         }
     }
@@ -36,21 +36,12 @@ public class Service {
         return new Lotto(numbers);
     }
 
-    public void checkBuyerLotteries(Buyer buyer, LottoGame lottoGame) {
+    public void checkBuyerLotteries(Buyer buyer, LottoGame lottoGame) { // result가 어디에 사용되지?
         HashMap<Rank, Integer> result = buyer.getLottoResult();
         for (Lotto lotto : buyer.getPurchasedLotteries()) {
             Rank rank = determineLottoRank(lottoGame, lotto);
             result.put(rank, result.getOrDefault(rank, COUNT_ZERO) + COUNT_ONE);
         }
-    }
-
-    private int countCorrectLottoNumbers(LottoGame lottoGame, Lotto lotto) {
-        return Utils.countSameElements(lottoGame.getWinningNumbers(), lotto.getNumbers());
-    }
-
-    private boolean containsBonusNumber(LottoGame lottoGame, Lotto lotto) {
-        return lotto.getNumbers()
-                    .contains(lottoGame.getBonusNumber());
     }
 
     private Rank determineLottoRank(LottoGame lottoGame, Lotto lotto) {
@@ -63,4 +54,14 @@ public class Service {
         }
         return rank;
     }
+
+    private int countCorrectLottoNumbers(LottoGame lottoGame, Lotto lotto) {
+        return Utils.countSameElements(lottoGame.getWinningNumbers(), lotto.getNumbers());
+    }
+
+    private boolean containsBonusNumber(LottoGame lottoGame, Lotto lotto) {
+        return lotto.getNumbers()
+                    .contains(lottoGame.getBonusNumber());
+    }
+
 }

@@ -70,5 +70,6 @@ public class Buyer {
     private void validatePurchaseAmount(int amount) {
         Validation.validateMultipleNumber(amount, LOTTO_LEAST_AMOUNT);
         Validation.validateExceedNumber(amount, LOTTO_MAX_AMOUNT);
+
     }
 }

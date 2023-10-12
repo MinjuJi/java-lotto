@@ -34,7 +34,7 @@ class ServiceTest {
     @Test
     void 입력된_금액으로_구매가능한_개수만큼_로또번호를_발급하는_기능_테스트() {
         //given
-        final Buyer case1 = new Buyer(1000);
+        final Buyer case1 = new Buyer(1_000);
         final Buyer case2 = new Buyer(100_000);
 
         //when
@@ -42,10 +42,8 @@ class ServiceTest {
         service.buyAllLotto(case2);
 
         //then
-        assertThat(case1.getPurchasedLotteries()
-                        .size()).isEqualTo(1);
-        assertThat(case2.getPurchasedLotteries()
-                        .size()).isEqualTo(100);
+        assertThat(case1.getPurchasedLotteries().size()).isEqualTo(1);
+        assertThat(case2.getPurchasedLotteries().size()).isEqualTo(100);
     }
 
     @DisplayName("당첨된 로또 개수가 몇 개인지 등수별로 저장하는 기능")
